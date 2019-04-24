@@ -1,13 +1,14 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import Comment from './comment.js';
-import dummyData from './dummyData';
+//import dummyData from './dummyData';
 
 class CommentaryBoard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: []
+      commentary: [],
+      test: []
     }
 
     this.displayComments = this.displayComments.bind(this);
@@ -16,8 +17,13 @@ class CommentaryBoard extends React.Component {
   componentWillMount() {
 
     // configure GET request
+    fetch('http://localhost:3000/commentary')
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({ commentary: data.commentary.reverse() })
+      })
 
-    this.setState({ data: dummyData.commentary.reverse() });
+    //this.setState({ commentary: dummyData.commentary.reverse() });
   }
 
   displayComments(array) {
@@ -27,14 +33,14 @@ class CommentaryBoard extends React.Component {
   }
 
   render() {
-    if (this.state.data.length < 1) {
-      return <View style={styles.commentaryHeader}> Loading . . . </View>
+    if (this.state.commentary.length < 1) {
+      return <Text style={styles.commentaryHeader}>Loading . . . </Text>
     } else {
       return (
         <View>
           <View style={styles.commentaryHeader}></View>
           <View style={styles.commentaryWrapper}>
-            {this.displayComments(this.state.data)}
+            {this.displayComments(this.state.commentary)}
           </View>
         </View>
       );

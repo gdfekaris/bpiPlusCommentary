@@ -53,4 +53,4 @@ const dummyData = {
   ]
 };
 
-export default dummyData;
+module.exports = { dummyData };

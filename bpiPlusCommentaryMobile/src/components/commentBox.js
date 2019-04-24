@@ -22,19 +22,19 @@ class CommentBox extends React.Component {
   handleSubmit(commentary) {
     let cleaned = commentaryCleanup(commentary)
     let data = {
-      "timestamp": new Date(), //.toString()
+      "timestamp": new Date().toString(),
       "username": cleaned[1],
       "commentary": cleaned[0]
     }
 
     //configure POST request
-    /*
-    fetch('/postCommentary', {
+
+    fetch('http://localhost:3000/postCommentary', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     });
-    */
+
 
     this.setState({ text: '' });
     console.log(data);

@@ -6,7 +6,7 @@ const Comment = (props) => {
     <View style={styles.commentCard}>
       <Text style={styles.commentaryStyle}>{props.comment.commentary}</Text>
       <Text style={styles.usernameStyle}>{props.comment.username}</Text>
-      <Text style={styles.timestampStyle}>{props.comment.timestamp.toString()}</Text>
+      <Text style={styles.timestampStyle}>{props.comment.timestamp}</Text>
     </View>
   );
 };
@@ -14,12 +14,14 @@ const Comment = (props) => {
 const styles = {
   commentaryStyle: {
     flex: 0,
+    alignSelf: 'flex-start',
     padding: 2,
     fontFamily: 'Hiragino Sans',
     fontSize: 12
   },
   usernameStyle: {
     flex: 0,
+    alignSelf: 'flex-end',
     padding: 2,
     fontFamily: 'Hiragino Sans',
     fontSize: 10
@@ -42,9 +44,7 @@ const styles = {
     marginRight: 5,
     marginBottom: 2.5,
     marginTop: 5,
-    padding: 3,
-    fontFamily: 'Hiragino Sans',
-    fontSize: 10
+    padding: 3
   }
 }
 
