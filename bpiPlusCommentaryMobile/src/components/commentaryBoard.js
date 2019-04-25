@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import Comment from './comment.js';
+import CommentBox from './commentBox.js';
 //import dummyData from './dummyData';
 
 class CommentaryBoard extends React.Component {
@@ -40,6 +41,7 @@ class CommentaryBoard extends React.Component {
           <View style={styles.commentaryWrapper}>
             {this.displayComments(this.state.commentary)}
           </View>
+          <CommentBox />
         </View>
       );
     }

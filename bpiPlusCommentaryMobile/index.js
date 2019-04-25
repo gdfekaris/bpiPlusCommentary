@@ -3,7 +3,6 @@ import { AppRegistry, View, ScrollView } from 'react-native';
 import Header from './src/components/header';
 import CurrentPrice from './src/components/currentPrice.js';
 import Chart from './src/components/chart.js';
-import CommentBox from './src/components/commentBox';
 import CommentaryBoard from './src/components/commentaryBoard.js';
 
 const App = () => {
@@ -13,7 +12,6 @@ const App = () => {
       <CurrentPrice />
       <Chart />
       <CommentaryBoard />
-      <CommentBox />
       <View style={{ height: 45 }} />
     </ScrollView>
   );
