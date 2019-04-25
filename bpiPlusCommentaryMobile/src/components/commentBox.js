@@ -24,17 +24,15 @@ class CommentBox extends React.Component {
     let data = {
       "timestamp": new Date().toString(),
       "username": cleaned[1],
-      "commentary": cleaned[0]
+      "commentary": cleaned[0],
+      "key": cleaned[2]
     }
-
-    //configure POST request
 
     fetch('http://localhost:3000/postCommentary', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     });
-
 
     this.setState({ text: '' });
     console.log(data);
@@ -45,7 +43,7 @@ class CommentBox extends React.Component {
       <View>
         <TextInput
           style={styles.textInputStyle}
-          placeholder='commentary; username'
+          placeholder='commentary; username; key'
           onChangeText={(text) => this.handleChange(text)}
           value={this.state.text}
         />

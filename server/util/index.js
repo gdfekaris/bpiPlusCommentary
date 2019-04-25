@@ -28,4 +28,22 @@ const commentaryCleanup = (string) => {
   return cleaned;
 }
 
-module.exports = { dataCleanup, commentaryCleanup };
+const lastTenComments = (array) => {
+  let result = [];
+  const start = array.length - 1;
+  const end = (array.length - 1) - 10
+  for (let i = start; i > end; i-- ) {
+    result.push(array[i]);
+  }
+  return result;
+}
+
+const authorizePost = (key) => {
+  if (key === 'bpi+com19') {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+module.exports = { dataCleanup, commentaryCleanup, authorizePost, lastTenComments };

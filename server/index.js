@@ -1,7 +1,7 @@
 const express = require('express');
 const helmet = require('helmet');
 const request = require('request');
-const { dataCleanup } = require('./util');
+const { dataCleanup, lastTenComments, authorizePost } = require('./util');
 const { dummyData }  = require('./dummyData');
 
 const app = express();
@@ -37,14 +37,19 @@ app.get('/current', (req, res) => {
 });
 
 app.post('/postCommentary', (req, res) => {
-  console.log(req.body);
-  res.send();
+  if (authorizePost(req.body.key)) {
+    console.log(req.body);
+    res.send();
+  } else {
+    console.log('unauthorized post');
+    res.status(400).send('Bad Request');
+  }
 });
 
 app.get('/commentary', (req, res) => {
   //build db to fetch/request commentary JSON obj from
 
-  res.send(dummyData);
+  res.send(lastTenComments(dummyData.commentary));
 })
 
 const DEFAULT_PORT = 3000;

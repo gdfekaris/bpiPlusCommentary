@@ -15,12 +15,10 @@ class CommentaryBoard extends React.Component {
   }
 
   componentWillMount() {
-
-    // configure GET request
     fetch('http://localhost:3000/commentary')
       .then((response) => response.json())
       .then((data) => {
-        this.setState({ commentary: data.commentary.reverse() })
+        this.setState({ commentary: data })
       })
 
     //this.setState({ commentary: dummyData.commentary.reverse() });
@@ -33,8 +31,8 @@ class CommentaryBoard extends React.Component {
   }
 
   render() {
-    if (this.state.commentary.length < 1) {
-      return <Text style={styles.commentaryHeader}>Loading . . . </Text>
+    if (this.state.commentary.length === 0) {
+      return <Text style={styles.loadingText}>Loading commentary . . . </Text>
     } else {
       return (
         <View>
@@ -49,6 +47,18 @@ class CommentaryBoard extends React.Component {
 }
 
 const styles = {
+  loadingText: {
+    flex: 1,
+    alignSelf: 'stretch',
+    height: 25,
+    marginLeft: 15,
+    marginRight: 15,
+    marginBottom: 15,
+    marginTop: 15,
+    color: 'grey',
+    fontFamily: 'Hiragino Sans',
+    fontSize: 14
+  },
   commentaryHeader: {
     flex: 1,
     alignSelf: 'stretch',
