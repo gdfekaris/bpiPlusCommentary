@@ -8,13 +8,13 @@ const dummyData = require('./dummyData');
 module.exports = () => {
   client.connect(function(err) {
     if (err) { return console.log(err) }
-    const db = dbName;
-    const collection = dbCollection;
+    const db = mongo.client.db(dbName);
+    const collection = db.collection(dbCollection);
 
     console.log('seed script connected to Mongo');
 
     for (let i = 0; i < dummyData.commentary; i++) {
-      db[collection].insert(dummyData.commentary[i]);
+      collection.insert(dummyData.commentary[i]);
       console.log('record added');
     }
   })
