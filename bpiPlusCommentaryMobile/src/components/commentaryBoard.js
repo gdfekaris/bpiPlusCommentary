@@ -16,7 +16,8 @@ class CommentaryBoard extends React.Component {
   }
 
   componentWillMount() {
-    fetch('http://localhost:3000/commentary')
+
+    fetch('http://ec2-52-42-102-6.us-west-2.compute.amazonaws.com:3000/commentary')
       .then((response) => response.json())
       .then((data) => {
         this.setState({ commentary: data })

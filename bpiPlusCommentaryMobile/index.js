@@ -18,6 +18,3 @@ const App = () => {
 }
 
 AppRegistry.registerComponent('bpiPlusCommentaryMobile', () => App);
-
-//possibly create a root <View> element with the {flex: 1} style,
-// in case the <ScrollView> doesn't work
