@@ -8,7 +8,7 @@ const dummyData = require('./dummyData');
 module.exports = () => {
   client.connect(function(err) {
     if (err) { return console.log(err) }
-    const db = mongo.client.db(dbName);
+    const db = client.db(dbName);
     const collection = db.collection(dbCollection);
 
     console.log('seed script connected to Mongo');
