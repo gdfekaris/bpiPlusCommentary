@@ -13,7 +13,7 @@ module.exports = () => {
 
     console.log('seed script connected to Mongo');
 
-    for (let i = 0; i < dummyData.commentary; i++) {
+    for (let i = 0; i < dummyData.commentary.length; i++) {
       collection.insert(dummyData.commentary[i]);
       console.log('record added');
     }
