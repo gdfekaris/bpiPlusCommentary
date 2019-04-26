@@ -14,7 +14,7 @@ module.exports = () => {
     console.log('seed script connected to Mongo');
 
     for (let i = 0; i < dummyData.commentary.length; i++) {
-      collection.insert(dummyData.commentary[i]);
+      collection.insertOne(dummyData.commentary[i]);
       console.log('record added');
     }
   })

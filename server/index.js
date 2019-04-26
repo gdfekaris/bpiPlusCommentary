@@ -50,7 +50,7 @@ app.post('/postCommentary', (req, res) => {
         const db = mongo.client.db(`bpiPlus`);
         const commentary = db.collection(`commentary`);
 
-        commentary.insert(req.body);
+        commentary.insertOne(req.body);
         res.send();
       }
     })
