@@ -28,7 +28,7 @@ class CommentBox extends React.Component {
       "key": cleaned[2]
     }
 
-    fetch('http://localhost:3000/postCommentary', {
+    fetch('http://ec2-52-42-102-6.us-west-2.compute.amazonaws.com:3000/postCommentary', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
@@ -47,7 +47,7 @@ class CommentBox extends React.Component {
           onChangeText={(text) => this.handleChange(text)}
           value={this.state.text}
         />
-        <Button onPress={() => this.handleSubmit(this.state.text)} />
+        <Button buttonText={'POST'} onPress={() => this.handleSubmit(this.state.text)} />
       </View>
     );
   }
@@ -73,3 +73,5 @@ const styles = {
 };
 
 export default CommentBox;
+
+// bpi+com19

@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, TouchableHighlight } from 'react-native';
 
-const Button = ({ onPress }) => {
+const Button = ({ onPress, buttonText }) => {
   const { buttonStyle, buttonTextStyle } = styles;
-  const buttonText = "POST";
+  //const buttonText = "POST";
 
   return (
     <View>
@@ -33,6 +33,7 @@ const styles = {
     borderColor: 'black',
     marginLeft: 10,
     marginRight: 10,
+    marginBottom: 10,
     paddingTop: 10,
     paddingBottom: 4
   }

@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import Comment from './comment.js';
 import CommentBox from './commentBox.js';
+import Button from './button.js';
 //import dummyData from './dummyData';
 
 class CommentaryBoard extends React.Component {
@@ -12,16 +13,26 @@ class CommentaryBoard extends React.Component {
       test: []
     }
 
+    this.getCommentary = this.getCommentary.bind(this);
     this.displayComments = this.displayComments.bind(this);
   }
 
-  componentWillMount() {
-
+  getCommentary() {
     fetch('http://ec2-52-42-102-6.us-west-2.compute.amazonaws.com:3000/commentary')
       .then((response) => response.json())
       .then((data) => {
         this.setState({ commentary: data })
       })
+  }
+
+  componentWillMount() {
+    this.getCommentary();
+
+    // fetch('http://ec2-52-42-102-6.us-west-2.compute.amazonaws.com:3000/commentary')
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     this.setState({ commentary: data })
+    //   })
 
     //this.setState({ commentary: dummyData.commentary.reverse() });
   }
@@ -43,6 +54,7 @@ class CommentaryBoard extends React.Component {
             {this.displayComments(this.state.commentary)}
           </View>
           <CommentBox />
+          <Button buttonText={'REFRESH FEED'} onPress={() => this.getCommentary()}/>
         </View>
       );
     }

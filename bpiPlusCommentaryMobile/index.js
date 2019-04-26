@@ -12,7 +12,7 @@ const App = () => {
       <CurrentPrice />
       <Chart />
       <CommentaryBoard />
-      <View style={{ height: 45 }} />
+      <View style={{ height: 250 }} />
     </ScrollView>
   );
 }
