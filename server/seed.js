@@ -3,7 +3,7 @@ const url = 'mongodb://localhost:27017';
 const client = new MongoClient(url, { useNewUrlParser: true });
 const dbName = 'bpiPlus';
 const dbCollection = 'commentary';
-const dummyData = require('./dummyData');
+const dummyData = require('./dummyData.js');
 
 module.exports = () => {
   client.connect(function(err) {
