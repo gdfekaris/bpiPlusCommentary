@@ -53,8 +53,8 @@ class CommentaryBoard extends React.Component {
           <View style={styles.commentaryWrapper}>
             {this.displayComments(this.state.commentary)}
           </View>
+          <Button buttonText={'REFRESH FEED'} onPress={() => this.getCommentary()} />
           <CommentBox />
-          <Button buttonText={'REFRESH FEED'} onPress={() => this.getCommentary()}/>
         </View>
       );
     }
