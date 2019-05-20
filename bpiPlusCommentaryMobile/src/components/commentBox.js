@@ -2,6 +2,7 @@ import React from 'react';
 import { View, TextInput, Text } from 'react-native';
 const sha256 = require('js-sha256');
 import HalfButton from './halfButton';
+import HashDisplay from './hashDisplay';
 const { commentaryCleanup } = require('./util');
 
 
@@ -14,8 +15,9 @@ class CommentBox extends React.Component {
       miningState: 'MINE',
       miningState2: '',
       tokens: '0',
-      hash: [],
-      difficulty: 2
+      hashes: [],
+      difficulty: 3,
+      singleHash: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -27,9 +29,9 @@ class CommentBox extends React.Component {
     this.miningDisplay = this.miningDisplay.bind(this);
   }
 
-  handleChange(text, hash) {
-    if (hash) {
-      this.setState({ hash });
+  handleChange(text, singleHash) {
+    if (singleHash) {
+      this.setState({ singleHash });
     } else {
       this.setState({ text });
     }
@@ -86,35 +88,53 @@ class CommentBox extends React.Component {
     let random = Math.floor((Math.random() * 50) + 1);
     let arr = []
 
-    let difficulty = this.state.difficulty;
+    //let difficulty = this.state.difficulty;
     let nonce = 0;
     let key = random.toString() + 'B' + nonce.toString()
     //let key = 'bpi+com19' + nonce.toString()
     let hash = sha256(key)
-
     arr.unshift(hash)
-    while (!hash.startsWith('00')) {
+
+    while (!hash.startsWith('000')) {
       nonce += 1;
       key = key + nonce.toString();
       hash = sha256(key);
       console.log(hash);
       arr.unshift(hash);
-      this.setState({ hash: arr })
+      // this.setState((state, arr) => {
+      //   return {
+      //     hashes: arr,
+      //   };
+      // });
+      //this.handleChange('', hash);
+      //this.setState({ hashes: arr, singleHash: hash })
+      //this.setState({ singleHash: hash });
+      //this.forceUpdate();
     }
 
-    if (hash.startsWith('00')) {
-      this.setState({ tokens: tokens + 1, hash: arr, miningState: 'MINE', miningState2: `success at difficulty ${difficulty.toString()}` })
+    if (hash.startsWith('000')) {
+      this.setState({
+        tokens: tokens + 1,
+        hashes: arr,
+        singleHash: hash,
+        miningState: 'MINE',
+        miningState2: `success`
+      });
     }
-
   }
 
   mineTokens() {
-    this.setState({ hash: [], miningState: 'Mining . . .', miningState2: 'mining . . .' });
+    let diff = this.state.difficulty.toString();
+    this.setState({
+      hashes: [],
+      miningState: 'Mining . . .',
+      miningState2: `mining at difficulty ${diff} . . .`
+    });
     setTimeout(
       function() {
         this.miner();
       }
-      .bind(this), 10
+      .bind(this), 30
     );
   }
 
@@ -138,7 +158,12 @@ class CommentBox extends React.Component {
   }
 
   hashDisplay () {
-    return this.state.hash.map((hash, index) => <Text key={index} style={styles.hashStyle}>{hash}</Text>)
+    // if (this.state.miningState === 'Mining . . .') {
+    //   return <Text style={styles.hashStyle}>{this.state.singleHash}</Text>
+    // } else {
+      return this.state.hashes.map((hash, index) => <Text key={index} style={styles.hashStyle}>{hash}</Text>);
+    //}
+
   }
 
   render() {
@@ -153,11 +178,9 @@ class CommentBox extends React.Component {
         />
         <HalfButton buttonText={'POST'} onPress={() => this.handleSubmit(this.state.text)} />
         {this.tokenDisplay()}
-        <View style={styles.divisionLine}></View>
         <HalfButton buttonText={this.state.miningState} onPress={() => this.mineTokens()} />
         {this.miningDisplay()}
         {this.hashDisplay()}
-        <View style={styles.divisionLine}></View>
       </View>
     );
   }
@@ -213,8 +236,8 @@ const styles = {
     borderWidth: 1,
     borderColor: 'white',
     borderRadius: 5,
-    marginLeft: 15,
-    marginRight: 15,
+    marginLeft: 10,
+    marginRight: 10,
     marginBottom: 10,
     marginTop: 10,
     fontFamily: 'Hiragino Sans',
