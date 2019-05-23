@@ -63,3 +63,6 @@ typings/
 # OSX
 #
 .DS_Store
+
+# Build archive directories
+ios_archive
